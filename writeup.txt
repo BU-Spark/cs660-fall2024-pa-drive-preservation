@@ -1,0 +1,48 @@
+								Design Decisions
+
+
+B Tree->The BTreeFile class handles data storage in a B+ tree, starting with a specified key index to keep entries ordered. 
+insertTuple finds the right leaf for each new entry and manages splits that may go up the tree, creating a new root if necessary. 
+getTuple retrieves entries safely, and `next` allows sequential traversal by advancing the iterator. 
+begin and end provide easy access to the start and end of the tree, supporting ordered scans. 
+A placeholder deleteTuple function allows for future deletion features. Together, these decisions keep data balanced and accessible in the B+ tree.
+
+Leaf Page->The LeafPage class is designed to efficiently handle tuples within a B+ tree leaf node. 
+It starts by calculating how many tuples the page can hold, allocating space for both the header and data. 
+The insertTuple function maintains a sorted order, checking for duplicates and shifting existing tuples if necessary. 
+When the page fills up, the `split` function divides it by moving half the tuples to a new page and returns a key for indexing purposes. 
+The getTuple function safely retrieves a tuple based on its position, with checks to prevent out-of-bounds access.
+Altogether, these choices support effective storage, orderly data management, and balanced splitting to keep the B+ tree operating smoothly.
+
+
+Index Page->The IndexPage class is designed to manage keys and child pointers efficiently within a B+ tree's internal node. 
+During setup, it calculates available space, sets up memory for keys and child pointers, and initializes the header. 
+The insert function keeps keys sorted by finding the right position, shifting entries as necessary, and returns whether the page is full. 
+When a split is needed, the split function divides the page, moving half the entries to a new page and returns the middle key to help update the parent node.
+This design supports efficient inserts, maintains order, and ensures balanced splits to keep the tree performing well.
+
+
+
+					Describe any missing or incomplete elements of your code.
+
+->The incomplete element of this code is that we are unable to pass two test cases:
+ 2 - BTreeTest.Sorted (Failed)
+ 3 - BTreeTest.Random (Failed)
+
+
+			Describe how long you spent on the assignment, and whether there was anything you found particularly difficult or confusing.
+
+We spent about 2 weeks working on the assignment.The most challenging part of the assignment was the sequence we chose for the file,we 
+were following the readme so we started with Btree but we were not achieving any progress then we started working on LeafPage and IndexPage,then
+we moved to the BTree.
+
+Sequence of working LeafPage->IndexPage->BTree
+
+
+
+					If you collaborate with someone else, you have to describe how you split the workload.
+
+I collaborated with my classmate Zainab Alhaddad,We discussed the approaches for all the three tasks.
+Zainab worked on LeafPage ,I worked on Index Page and together we worked on BTree File.
+
+
